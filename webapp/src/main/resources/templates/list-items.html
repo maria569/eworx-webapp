@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<meta charset="UTF-8">
+	<title>list-items</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script></head>
+<body>
+	<table class="table table-striped" style="width:50%">
+		<thead class="thead-dark">
+			<tr>
+				<th>Item</th>
+				<th>Price</th>
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:each="item : ${items}">
+				<td th:text="${item.name}"/>
+				<td th:text="${item.price}"/>
+				<td>
+					<a class="btn btn-info" th:href="@{/items/addToBasket(itemId=${item.itemId})}">
+						    Add to basket
+					</a>  
+
+				</td>
+			</tr>
+		</tbody>
+	</table>
+	<br>
+	<div style="margin-left:8%">
+		<span style="font-size:110%; font-weight:bold;" th:text="${basketSize} + ' items added in basket'"></span>
+		<a style="margin-left:5%" class="btn btn-info" th:href="@{/items/basket}">
+			Go to basket
+		</a>
+		<div th:if="${discount}">
+			<p style="font-size:110%; color:red;">You 've earned 10% of discount</p>
+		</div>
+	</div>
+</body>
+</html>
